@@ -223,7 +223,7 @@ class SetCoveringMachine(BaseSetCoveringMachine):
         Sets verbose mode on/off.
     """
 
-    def __init__(self, model_type=conjunction, p=1.0, max_rules=10):
+    def __init__(self, model_type=conjunction, p=1.0, max_rules=10, calculation_type='normal', weight=1, old_model=None, proportion=0.5):
         super(SetCoveringMachine, self).__init__(model_type=model_type, max_rules=max_rules)
 
         if model_type == conjunction:
@@ -234,6 +234,11 @@ class SetCoveringMachine(BaseSetCoveringMachine):
             raise ValueError("Unsupported model type.")
 
         self.p = p
+        self.calculation_type = calculation_type
+        self.weight = weight
+        self.old_model = old_model
+        self.proportion = proportion
+
 
     def _get_best_utility_rules(self, rule_classifications, positive_example_idx, negative_example_idx,
                                 rule_blacklist=[]):
